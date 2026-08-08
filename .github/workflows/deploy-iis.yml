@@ -1,0 +1,90 @@
+name: Deploy to IIS
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    defaults:
+      run:
+        shell: powershell
+    env:
+      # Avoid git "dubious ownership" when runner service account change
+      GIT_CONFIG_COUNT: 1
+      GIT_CONFIG_KEY_0: safe.directory
+      GIT_CONFIG_VALUE_0: "*"
+
+    steps:
+      - name: Fix work folder ownership
+        run: |
+          git config --system --add safe.directory "*"
+
+          $workRepo = "C:\Users\Administrator\_work\HTIS_Website"
+          if (Test-Path $workRepo) {
+            Write-Host "Removing old work folder owned by previous service account..."
+            Remove-Item -LiteralPath $workRepo -Recurse -Force -ErrorAction SilentlyContinue
+          }
+
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to IIS
+        run: |
+          $ErrorActionPreference = "Continue"
+          $dest = "C:\inetpub\wwwroot\HTISWebsite"
+          # Change if your IIS app pool name is different
+          $appPoolName = "HTISWebsite"
+          $appPoolStopped = $false
+
+          if (-not (Test-Path $dest)) {
+            New-Item -ItemType Directory -Path $dest -Force | Out-Null
+          }
+
+          # Prefer appcmd (works when runner runs as Local System / admin)
+          $appcmd = "$env:windir\System32\inetsrv\appcmd.exe"
+          if (Test-Path $appcmd) {
+            Write-Host "Stopping app pool via appcmd: $appPoolName"
+            & $appcmd stop apppool /apppool.name:"$appPoolName"
+            if ($LASTEXITCODE -eq 0) {
+              $appPoolStopped = $true
+              Start-Sleep -Seconds 2
+            } else {
+              Write-Host "Could not stop app pool (exit $LASTEXITCODE). Continuing with robocopy retries."
+            }
+          }
+
+          $code = 0
+          for ($attempt = 1; $attempt -le 3; $attempt++) {
+            Write-Host "Deploy attempt $attempt..."
+            & robocopy "dist" $dest /MIR /R:5 /W:2 /NFL /NDL /NJH /NJS /NP
+            $code = $LASTEXITCODE
+            Write-Host "robocopy exit code: $code"
+            if ($code -lt 8) { break }
+            Start-Sleep -Seconds 3
+          }
+
+          if ($appPoolStopped -and (Test-Path $appcmd)) {
+            Write-Host "Starting app pool via appcmd: $appPoolName"
+            & $appcmd start apppool /apppool.name:"$appPoolName"
+          }
+
+          if ($code -ge 8) {
+            throw "robocopy failed with exit code $code. Grant the runner service Local System (or an admin account) and write access to $dest."
+          }
+
+          Write-Host "Deployed to $dest"
