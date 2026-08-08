@@ -2,7 +2,7 @@ name: Deploy to IIS
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -22,7 +22,7 @@ jobs:
         run: |
           git config --system --add safe.directory "*"
 
-          $workRepo = "C:\Users\Administrator\_work\HTIS_Website"
+          $workRepo = "C:\Users\Administrator\_work\HTIS_International_Website"
           if (Test-Path $workRepo) {
             Write-Host "Removing old work folder owned by previous service account..."
             Remove-Item -LiteralPath $workRepo -Recurse -Force -ErrorAction SilentlyContinue
@@ -46,9 +46,9 @@ jobs:
       - name: Deploy to IIS
         run: |
           $ErrorActionPreference = "Continue"
-          $dest = "C:\inetpub\wwwroot\HTISWebsite"
+          $dest = "C:\inetpub\wwwroot\HTISInternationalWebsite"
           # Change if your IIS app pool name is different
-          $appPoolName = "HTISWebsite"
+          $appPoolName = "htis.international"
           $appPoolStopped = $false
 
           if (-not (Test-Path $dest)) {
