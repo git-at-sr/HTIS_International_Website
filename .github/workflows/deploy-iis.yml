@@ -22,7 +22,7 @@ jobs:
         run: |
           git config --system --add safe.directory "*"
 
-          $workRepo = "C:\Users\Administrator\_work\HTIS_International_Website"
+          $workRepo = "C:\actions-runner\_work\HTIS_International_Website"
           if (Test-Path $workRepo) {
             Write-Host "Removing old work folder owned by previous service account..."
             Remove-Item -LiteralPath $workRepo -Recurse -Force -ErrorAction SilentlyContinue
