@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://htis.in/sitemap-index.xml
+Sitemap: https://htis.international/sitemap-index.xml

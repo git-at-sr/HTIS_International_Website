@@ -24,7 +24,7 @@ const yamlPlugin = {
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://htis.in',
+  site: 'https://htis.international',
   output: 'static',
   integrations: [svelte(), alpinejs(), sitemap()],
   vite: {
