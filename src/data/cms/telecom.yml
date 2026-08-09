@@ -337,7 +337,7 @@ execution:
       showDecimalAnimation: false
       suffix: +
       label: Countries Served
-      subLabel: India, Bangladesh, Nepal, Sri Lanka, South Africa, UK, Nigeria, CAR
+      subLabel: India, Bangladesh, Nepal, Sri Lanka, South Africa, UK, Nigeria, CAR, Kazakhstan
     - target: 3
       showDecimalAnimation: false
       suffix: /4

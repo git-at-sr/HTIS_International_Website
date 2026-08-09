@@ -144,6 +144,13 @@ ourPresence:
       lng: 79.8612
       isHQ: false
       mapUrl: 'https://www.google.com/maps/place/HTIS+Telecom+Private+Limited/@28.4484266,77.0329455,17z/data=!3m1!4b1!4m6!3m5!1s0x390d1837e0ebfce9:0x7f590e5c9529a339!8m2!3d28.4484266!4d77.0329455!16s%2Fg%2F11bx8hly6x?entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D'
+    - name: Kazakhstan
+      address: Astana city, Nura district, Seksek Ata street, building 11, index
+        010000
+      lat: 51.1694
+      lng: 71.4491
+      isHQ: false
+      mapUrl: 'https://www.google.com/maps/search/?api=1&query=Seksek+Ata+street+building+11+Nura+district+Astana+010000+Kazakhstan'
   indiaOffices:
     - name: Mohali (HQ)
       address: E 94, 1st Floor, ELTOP Industrial Area, Phase 8, Mohali - 160055,

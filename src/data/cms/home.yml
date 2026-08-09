@@ -274,8 +274,8 @@ journey:
         nationwide telecom delivery capabilities.
       image: src/assets/geminigeneratedimageno004jno004jno00.png
     - year: "2012"
-      title: HTIS Telecom Pvt. Ltd. Incorporated
-      description: Formal incorporation of HTIS Telecom Private Limited, laying the
+      title: HTIS International Incorporated
+      description: Formal incorporation of HTIS International, laying the
         foundation for future growth.
       image: src/assets/geminigeneratedimage8k8gkr8k8gkr8k8g.png
     - year: "2013"
@@ -295,7 +295,7 @@ journey:
     - year: "2017"
       title: International Expansion
       description: Expanded operations beyond India to support projects in Sri Lanka,
-        Bangladesh, South Africa, and other international markets.
+        Bangladesh, South Africa, Kazakhstan, and other international markets.
       image: src/assets/geminigeneratedimagexq8lrxq8lrxq8lrx.png
     - year: "2018"
       title: WFMS Foundation
@@ -378,26 +378,23 @@ team:
       desc: Sets the company’s long-term goals and ensures we stay a leader in the
         technology industry.
       image: src/assets/edited-photo-1.png
-    - name: Sandeep Aswal
-      role: Chief Operating Officer
-      desc: Manages daily business tasks to make sure all large projects are completed
-        successfully and on time.
-      image: src/assets/edited-photo-3.png
-    - name: Amit Dhingra
-      role: Senior Vice President
-      desc: Leads major company projects and manages relationships with our most
-        important partners.
-      image: src/assets/edited-photo-1-1.png
-    - name: Arvind Sharma
-      role: Head - Centre of Excellence
-      desc: Sets the high technical standards for our services and finds new ways to
-        solve technology problems.
-      image: src/assets/edited-photo-2.png
+    - name: Natalia Markelova
+      role: Chief Executive Officer
+      desc: Leads HTIS operations and growth strategy across Kazakhstan and the
+        regional market.
+      image: src/assets/Natalia.png
+    - name: Ankush Bhardwaj
+      role: Chief Administration Officer
+      desc: Oversees administration, governance, and organizational operations to
+        support seamless business delivery.
+      image: src/assets/Ankush.png
+
+
 footprint:
   sectionId: footprint
   heading: Global Footprint
   metrics:
-    - value: "8"
+    - value: "9"
       suffix: +
       label: Countries Served
     - value: "28"
@@ -431,6 +428,10 @@ footprint:
         latitude: 6.5244
         longitude: 3.3792
         size: 0.04
+      - name: Kazakhstan
+        latitude: 51.1694
+        longitude: 71.4491
+        size: 0.05
 clients:
   sectionId: clients
   heading: Some of our valuable Clients
@@ -526,7 +527,7 @@ testimonials:
         great—please keep up the good work.”
       name: Ralf Schmidt
       title: CX Delivery – Vodafone & UKI Service Providers, Cisco
-    - quote: “HTIS Telecom's Health & Safety Management System was found to be aligned
+    - quote: “HTIS International's Health & Safety Management System was found to be aligned
         with Vodafone's Absolute Rules and Cisco Health & Safety standards. The
         maturity of processes, consistency of records, and visible management
         commitment reflect a strong foundation for a robust safety culture.”

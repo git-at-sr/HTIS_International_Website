@@ -73,6 +73,12 @@
       name: 'Nigeria',
       detail: 'Victoria Island, Lagos 101241',
     },
+    {
+      location: [51.1694, 71.4491],
+      size: 0.05,
+      name: 'Kazakhstan',
+      detail: 'Astana city, Nura district, Seksek Ata street, building 11, index 010000',
+    },
   ];
 
   const labeledMarkers = $derived(markers?.length ? markers : DEFAULT_MARKERS);

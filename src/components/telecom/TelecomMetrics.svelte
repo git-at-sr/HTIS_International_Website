@@ -42,7 +42,7 @@
       unit: '',
       suffix: '+',
       label: 'Countries Served',
-      subLabel: 'India, Bangladesh, Nepal, Sri Lanka, South Africa, UK, Nigeria, CAR',
+      subLabel: 'India, Bangladesh, Nepal, Sri Lanka, South Africa, UK, Nigeria, CAR, Kazakhstan',
     },
     {
       target: 3,
