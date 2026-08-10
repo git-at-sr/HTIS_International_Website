@@ -482,9 +482,9 @@ interface AboutYaml {
     title: string;
     description: string;
     globalTabLabel: string;
-    indiaTabLabel: string;
+    indiaTabLabel?: string;
     globalLocations: AboutLocation[];
-    indiaOffices: AboutLocation[];
+    indiaOffices?: AboutLocation[];
   };
   principles: {
     sectionId?: string;
@@ -1020,7 +1020,7 @@ export const footer = footerYaml as {
   company: { heading: string; links: CmsLink[] };
   services: { heading: string; links: CmsLink[] };
   socials: { links: Array<CmsLink & { icon: string }> };
-  contact: { heading: string; phone: string; email: string };
+  contact?: { heading: string; phone: string; email: string };
   offices: {
     heading: string;
     indiaFlagCode: string;
@@ -1131,7 +1131,7 @@ function resolveLinkedInEmbed(post: {
   const fallbackTitle =
     post.fallbackTitle?.trim() && post.fallbackTitle.trim() !== 'Embedded post'
       ? post.fallbackTitle.trim()
-      : 'View this update from HTIS Telecom on LinkedIn.';
+      : 'View this update from HTIS International on LinkedIn.';
 
   return {
     embedCode: post.embedCode,
@@ -1235,7 +1235,7 @@ function resolveSocialEmbed(post: {
     title: getIframeAttribute(post.embedCode, 'title') || `Embedded ${platformName} post`,
     fallbackTitle:
       post.fallbackTitle?.trim() ||
-      `View this update from HTIS Telecom on ${platformName}.`,
+      `View this update from HTIS International on ${platformName}.`,
   };
 }
 

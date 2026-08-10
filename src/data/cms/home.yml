@@ -373,16 +373,16 @@ team:
   ctaLabel: Learn More
   ctaUrl: /about#team
   members:
-    - name: Aditya Kaushik
-      role: Managing Director
-      desc: Sets the company’s long-term goals and ensures we stay a leader in the
-        technology industry.
-      image: src/assets/edited-photo-1.png
     - name: Natalia Markelova
-      role: Chief Executive Officer
+      role: Managing Director - Kazakhstan
       desc: Leads HTIS operations and growth strategy across Kazakhstan and the
         regional market.
       image: src/assets/Natalia.png
+    - name: Aditya Kaushik
+      role: Managing Director - India
+      desc: Sets the company’s long-term goals and ensures we stay a leader in the
+        technology industry.
+      image: src/assets/edited-photo-1.png
     - name: Ankush Bhardwaj
       role: Chief Administration Officer
       desc: Oversees administration, governance, and organizational operations to
@@ -400,7 +400,7 @@ footprint:
     - value: "28"
       suffix: +
       label: States & Union Territories Served
-    - value: Pan-India
+    - value: Multi-Region
       label: Delivery Network
   globe:
     markers:

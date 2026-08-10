@@ -9,7 +9,7 @@ pageHeader:
     url: /
 ---
 
-Welcome to **HTIS Telecom** ("Company", "we", "our", or "us").
+Welcome to **HTIS International** ("Company", "we", "our", or "us").
 
 This Privacy Policy explains how we collect, use, disclose, and protect your information when you visit our website, [htis.international](https://htis.international/).
 
@@ -123,7 +123,7 @@ Subject to applicable laws, including India's Digital Personal Data Protection A
 - Opt out of marketing communications
 - Request information regarding processing activities
 
-To exercise these rights, contact us at [help@htis.in](mailto:help@htis.in).
+To exercise these rights, contact us at [help@htis.International](mailto:help@htis.International).
 
 ## 8. International Data Handling
 
@@ -151,8 +151,8 @@ We encourage users to periodically review this Privacy Policy.
 
 If you have questions, concerns, privacy-related requests, or data deletion requests, please contact:
 
-**HTIS Telecom**
+**HTIS International**
 
 Website: [htis.international](https://htis.international/)
 
-Email: [help@htis.in](mailto:help@htis.in)
+Email: [help@htis.International](mailto:help@htis.International)

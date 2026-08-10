@@ -44,10 +44,18 @@ team:
   title: The Team behind the [HTIS]{color=primary}
   description: A passionate team of experts collaborating to deliver excellence.
   members:
-    - name: "Aditya Kaushik "
-      role: Managing Director
-      dept: "HTIS "
+    - name: Natalia Markelova
+      role: Managing Director - Kazakhstan
+      dept: HTIS
+      image: src/assets/Natalia.png
+    - name: Aditya Kaushik
+      role: Managing Director - India
+      dept: HTIS
       image: src/assets/ak-2-1.png
+    - name: Ankush Bhardwaj
+      role: Chief Administration Officer
+      dept: HTIS
+      image: src/assets/Ankush.png
     - name: "Sandeep Aswal "
       role: Chief Operating Officer
       dept: HTIS
@@ -105,14 +113,20 @@ ourPresence:
   globalTabLabel: Global Presence
   indiaTabLabel: India Offices
   globalLocations:
-    - name: India (HQ)
+    - name: Kazakhstan (HQ)
+      address: Astana city, Nura district, Seksek Ata street, building 11, index
+        010000
+      email: info@htis.International
+      lat: 51.1694
+      lng: 71.4491
+      isHQ: true
+      mapUrl: 'https://www.google.com/maps/search/?api=1&query=Seksek+Ata+street+building+11+Nura+district+Astana+010000+Kazakhstan'
+    - name: India
       address: E 94, 1st Floor, ELTOP Industrial Area, Phase 8, Mohali - 160055,
         Punjab, India
-      phone: 0172-5096134
-      email: info@htis.in
-      lat: 32.4595
+      lat: 30.7046
       lng: 76.7179
-      isHQ: true
+      isHQ: false
       mapUrl: 'https://www.google.com/maps/place/HTIS+Telecom+Private+Limited/@28.4484266,77.0329455,17z/data=!3m1!4b1!4m6!3m5!1s0x390d1837e0ebfce9:0x7f590e5c9529a339!8m2!3d28.4484266!4d77.0329455!16s%2Fg%2F11bx8hly6x?entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D'
     - name: United Kingdom
       address: 30 St Mary Axe, London EC3A 8BF, United Kingdom
@@ -144,72 +158,7 @@ ourPresence:
       lng: 79.8612
       isHQ: false
       mapUrl: 'https://www.google.com/maps/place/HTIS+Telecom+Private+Limited/@28.4484266,77.0329455,17z/data=!3m1!4b1!4m6!3m5!1s0x390d1837e0ebfce9:0x7f590e5c9529a339!8m2!3d28.4484266!4d77.0329455!16s%2Fg%2F11bx8hly6x?entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D'
-    - name: Kazakhstan
-      address: Astana city, Nura district, Seksek Ata street, building 11, index
-        010000
-      lat: 51.1694
-      lng: 71.4491
-      isHQ: false
-      mapUrl: 'https://www.google.com/maps/search/?api=1&query=Seksek+Ata+street+building+11+Nura+district+Astana+010000+Kazakhstan'
-  indiaOffices:
-    - name: Mohali (HQ)
-      address: E 94, 1st Floor, ELTOP Industrial Area, Phase 8, Mohali - 160055,
-        Punjab, India
-      phone: 0172-5096134
-      email: info@htis.in
-      lat: 30.7046
-      lng: 76.7179
-      isHQ: true
-      mapUrl: 'https://www.google.com/maps/place/HTIS+Telecom+Private+Limited/@28.4484266,77.0329455,17z/data=!3m1!4b1!4m6!3m5!1s0x390d1837e0ebfce9:0x7f590e5c9529a339!8m2!3d28.4484266!4d77.0329455!16s%2Fg%2F11bx8hly6x?entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D'
-    - name: Gurgaon
-      address: PHS Business Center, 353/18, Civil Lines, Gurgaon - 122001 Haryana, India
-      phone: 0124-27243598
-      email: info@htis.in
-      lat: 28.4595
-      lng: 77.0266
-      isHQ: false
-      mapUrl: 'https://www.google.com/maps/place/HTIS+Telecom+Private+Limited/@28.4484266,77.0329455,17z/data=!3m1!4b1!4m6!3m5!1s0x390d1837e0ebfce9:0x7f590e5c9529a339!8m2!3d28.4484266!4d77.0329455!16s%2Fg%2F11bx8hly6x?entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D'
-    - name: Shimla
-      address: Flat A-01, Verma Apartment, near ISBT Tutikandi, Shimla - 171004, India
-      phone: "9817038008"
-      email: SML@htis.in
-      lat: 31.1048
-      lng: 77.1734
-      isHQ: false
-      mapUrl: 'https://www.google.com/maps/place/HTIS+Telecom+Private+Limited/@28.4484266,77.0329455,17z/data=!3m1!4b1!4m6!3m5!1s0x390d1837e0ebfce9:0x7f590e5c9529a339!8m2!3d28.4484266!4d77.0329455!16s%2Fg%2F11bx8hly6x?entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D'
-    - name: J&K
-      address: Rather Complex, Baba Dharam Dass, Munwarabad, Srinagar - 190001, India
-      phone: "7006520020"
-      email: JnK@htis.in
-      lat: 34.0837
-      lng: 74.7973
-      isHQ: false
-      mapUrl: 'https://www.google.com/maps/place/HTIS+Telecom+Private+Limited/@28.4484266,77.0329455,17z/data=!3m1!4b1!4m6!3m5!1s0x390d1837e0ebfce9:0x7f590e5c9529a339!8m2!3d28.4484266!4d77.0329455!16s%2Fg%2F11bx8hly6x?entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D'
-    - name: Dehradun
-      address: S-6, Tula Palace Araghar Chowk, Haridwar Road, Dehradun - 248001, India
-      phone: "9639194590"
-      email: DDN@htis.in
-      lat: 30.3165
-      lng: 78.0322
-      isHQ: false
-      mapUrl: 'https://www.google.com/maps/place/HTIS+Telecom+Private+Limited/@28.4484266,77.0329455,17z/data=!3m1!4b1!4m6!3m5!1s0x390d1837e0ebfce9:0x7f590e5c9529a339!8m2!3d28.4484266!4d77.0329455!16s%2Fg%2F11bx8hly6x?entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D'
-    - name: Chennai
-      address: 2f, 1st Floor, Rajarajan Street, Navarathna Garden Main Road,
-        Ekkattuthangal, Chennai - 600032, India
-      phone: "9894010885"
-      email: CHN@htis.in
-      lat: 13.0116
-      lng: 80.2039
-      isHQ: false
-      mapUrl: 'https://www.google.com/maps/place/HTIS+Telecom+Private+Limited/@28.4484266,77.0329455,17z/data=!3m1!4b1!4m6!3m5!1s0x390d1837e0ebfce9:0x7f590e5c9529a339!8m2!3d28.4484266!4d77.0329455!16s%2Fg%2F11bx8hly6x?entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D'
-    - name: Mumbai
-      address: Mumbai, India (UPCOMING)
-      phone: "8699954005"
-      email: MUM@htis.in
-      lat: 19.076
-      lng: 72.8777
-      isHQ: false
-      mapUrl: 'https://www.google.com/maps/place/HTIS+Telecom+Private+Limited/@28.4484266,77.0329455,17z/data=!3m1!4b1!4m6!3m5!1s0x390d1837e0ebfce9:0x7f590e5c9529a339!8m2!3d28.4484266!4d77.0329455!16s%2Fg%2F11bx8hly6x?entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D'
+  indiaOffices: []
 principles:
   image: src/assets/about-principles.png
   imageAlt: Telecom tower and architectural technology elements
@@ -232,24 +181,24 @@ social:
     - platform: facebook
       embedCode: <iframe
         src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fhtistelecomindia%2Fposts%2Fpfbid02M1g2gzWy1S14txBiGFrUoF3McS1W6qxbTWJQDKeqsgpjLxoTHDs7CeJPzDyuYxQl&amp;show_text=true&amp;width=500"
-        width="500" height="757" title="HTIS Telecom Facebook post"></iframe>
+        width="500" height="757" title="HTIS International Facebook post"></iframe>
       fallbackTitle: View our latest update on Facebook.
     - platform: facebook
       embedCode: <iframe
         src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fhtistelecomindia%2Fposts%2Fpfbid0xTbstPxdDjNBmnQZbSMXkjBT5baEyaD4wNA5ZaN7xaMqWGAKVHPbdoVn4eZx61GVl&amp;show_text=false&amp;width=500"
-        width="500" height="498" title="HTIS Telecom Facebook post"></iframe>
-      fallbackTitle: View this post from HTIS Telecom on Facebook.
+        width="500" height="498" title="HTIS International Facebook post"></iframe>
+      fallbackTitle: View this post from HTIS International on Facebook.
     - platform: instagram
       embedCode: <iframe
         src="https://www.instagram.com/p/DZpt1A7gRdn/embed/captioned/"
-        width="540" height="820" title="HTIS Telecom Instagram post"></iframe>
-      fallbackTitle: View this post from HTIS Telecom on Instagram.
+        width="540" height="820" title="HTIS International Instagram post"></iframe>
+      fallbackTitle: View this post from HTIS International on Instagram.
     - platform: instagram
       embedCode: <iframe
         src="https://www.instagram.com/p/DYraOxbgSTc/embed/captioned/"
-        width="540" height="820" title="HTIS Telecom Instagram post"></iframe>
-      fallbackTitle: View this post from HTIS Telecom on Instagram.
+        width="540" height="820" title="HTIS International Instagram post"></iframe>
+      fallbackTitle: View this post from HTIS International on Instagram.
     - platform: instagram
       embedCode: <iframe src="https://www.instagram.com/p/DYZ1ieZlIku/embed/"
-        width="540" height="680" title="HTIS Telecom Instagram post"></iframe>
-      fallbackTitle: View this post from HTIS Telecom on Instagram.
+        width="540" height="680" title="HTIS International Instagram post"></iframe>
+      fallbackTitle: View this post from HTIS International on Instagram.

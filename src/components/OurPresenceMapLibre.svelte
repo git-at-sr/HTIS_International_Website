@@ -21,12 +21,12 @@
     title: string;
     description: string;
     globalTabLabel: string;
-    indiaTabLabel: string;
+    indiaTabLabel?: string;
     globalLocations: Location[];
-    indiaOffices: Location[];
+    indiaOffices?: Location[];
   }
 
-  let { sectionId, title, description, globalTabLabel, indiaTabLabel, globalLocations, indiaOffices }: Props = $props();
+  let { sectionId, title, description, globalTabLabel, indiaTabLabel = 'India Offices', globalLocations, indiaOffices = [] }: Props = $props();
   let mapContainer = $state<HTMLDivElement | null>(null);
   let map: MapLibreType.Map | null = null;
   let ML: typeof MapLibreType | null = null;
@@ -34,6 +34,7 @@
   let selectedLocation = $state<Location | null>(null);
   let markers: { loc: Location; marker: MapLibreType.Marker; popup: MapLibreType.Popup }[] = [];
   let pinnedPopup: MapLibreType.Popup | null = null;
+  const showIndiaTab = $derived(indiaOffices.length > 0);
 
   const styleUrl = 'https://tiles.openfreemap.org/styles/bright';
   const indiaSource = 'india-claimed-boundary';
@@ -41,7 +42,7 @@
   // Bounding boxes ([west, south], [east, north]) per tab. fitBounds derives
   // the zoom/center from the container size, so the full region stays visible
   // on mobile and desktop alike.
-  const globalBounds: MapLibreType.LngLatBoundsLike = [[-20, -36], [97.5, 60]]; // Europe, Africa & India
+  const globalBounds: MapLibreType.LngLatBoundsLike = [[-20, -36], [97.5, 60]]; // Europe, Africa, India & Kazakhstan
   const indiaBounds: MapLibreType.LngLatBoundsLike = [[68, 6], [97.5, 37]]; // whole of India
 
   function fitActiveView(animate = true) {
@@ -224,17 +225,23 @@
 
     <div class="grid grid-cols-1 overflow-hidden rounded-3xl border border-base-200/60 bg-base-100 shadow-md lg:grid-cols-12">
       <div class="flex flex-col border-b border-base-200/60 lg:col-span-4 lg:border-r lg:border-b-0">
-        <div class="grid grid-cols-2 border-b border-base-200/50 bg-base-200/35 p-2">
-          <button type="button" class="flex cursor-pointer items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold transition-all {activeTab === 'global' ? 'bg-base-100 text-primary shadow-sm' : 'text-base-content/75'}" onclick={() => switchTab('global')}>
+        {#if showIndiaTab}
+          <div class="grid grid-cols-2 border-b border-base-200/50 bg-base-200/35 p-2">
+            <button type="button" class="flex cursor-pointer items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold transition-all {activeTab === 'global' ? 'bg-base-100 text-primary shadow-sm' : 'text-base-content/75'}" onclick={() => switchTab('global')}>
+              <Globe class="h-4 w-4" /><CmsRichTextSvelte value={globalTabLabel} />
+            </button>
+            <button type="button" class="flex cursor-pointer items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold transition-all {activeTab === 'india' ? 'bg-base-100 text-primary shadow-sm' : 'text-base-content/75'}" onclick={() => switchTab('india')}>
+              <MapPin class="h-4 w-4" /><CmsRichTextSvelte value={indiaTabLabel} />
+            </button>
+          </div>
+        {:else}
+          <div class="flex items-center gap-2 border-b border-base-200/50 bg-base-200/35 px-4 py-3 text-sm font-semibold text-primary">
             <Globe class="h-4 w-4" /><CmsRichTextSvelte value={globalTabLabel} />
-          </button>
-          <button type="button" class="flex cursor-pointer items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold transition-all {activeTab === 'india' ? 'bg-base-100 text-primary shadow-sm' : 'text-base-content/75'}" onclick={() => switchTab('india')}>
-            <MapPin class="h-4 w-4" /><CmsRichTextSvelte value={indiaTabLabel} />
-          </button>
-        </div>
+          </div>
+        {/if}
 
         <div class="max-h-[350px] flex-1 space-y-2 overflow-y-auto p-4 lg:max-h-[520px]">
-          {#each activeTab === 'global' ? globalLocations : indiaOffices as loc}
+          {#each activeTab === 'global' || !showIndiaTab ? globalLocations : indiaOffices as loc}
             <div role="button" tabindex="0" class="group relative flex w-full cursor-pointer flex-col gap-2.5 rounded-2xl border p-4 text-left transition-all hover:border-primary/20 hover:bg-base-200/40 {selectedLocation?.name === loc.name ? 'border-primary/30 bg-primary/5' : 'border-base-200/60'}" onclick={() => selectLocation(loc)} onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectLocation(loc); } }}>
               {#if loc.mapUrl}
                 <a href={loc.mapUrl} target="_blank" rel="noopener noreferrer" onclick={(e) => e.stopPropagation()} class="absolute right-2.5 bottom-2.5 flex h-10 w-10 items-center justify-center rounded-lg text-primary transition-colors hover:bg-primary/10" aria-label="Open {loc.name} in Google Maps">

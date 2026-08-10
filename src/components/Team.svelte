@@ -122,7 +122,13 @@
             <img
               src={member.img}
               alt={member.name}
-              class="team-img h-full w-auto max-w-none origin-bottom object-contain transition-all duration-800 ease-[cubic-bezier(0.25,1,0.5,1)]"
+              class="team-img transition-all duration-800 ease-[cubic-bezier(0.25,1,0.5,1)] {/ankush/i.test(
+                member.name,
+              )
+                ? 'team-img-lift h-full w-full origin-top object-cover object-top'
+                : /natalia/i.test(member.name)
+                  ? 'h-full w-full origin-top object-cover object-top'
+                  : 'h-full w-auto max-w-none origin-bottom object-contain'}"
             />
           </div>
         </div>

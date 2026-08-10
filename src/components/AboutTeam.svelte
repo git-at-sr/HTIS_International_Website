@@ -123,7 +123,13 @@
             <div
               class="h-16 w-16 overflow-hidden rounded-xl border border-base-200/60 bg-base-200 shrink-0"
             >
-              <img src={member.img} alt={member.name} class="h-full w-full object-cover" />
+              <img
+                src={member.img}
+                alt={member.name}
+                class="h-full w-full object-cover {/natalia|ankush/i.test(member.name)
+                  ? 'object-top'
+                  : 'object-center'}"
+              />
             </div>
             <div class="flex flex-col min-w-0">
               <CmsRichTextSvelte

@@ -6,8 +6,6 @@ import InstagramIcon from './icons/InstagramIcon.astro';
 import LinkedInIcon from './icons/LinkedInIcon.astro';
 import FacebookIcon from './icons/FacebookIcon.astro';
 import YoutubeIcon from './icons/YoutubeIcon.astro';
-import PhoneIcon from './icons/PhoneIcon.astro';
-import EnvelopeIcon from './icons/EnvelopeIcon.astro';
 import ArrowRightIcon from './icons/ArrowRightIcon.astro';
 import CmsRichText from './CmsRichText.astro';
 
@@ -83,87 +81,51 @@ const totalRows = (offices.length + emptyCellsCount) / 4;
           </div>
         </aside>
 
-        <!-- Company, Services, and Contact Columns -->
+        <!-- Company and Services Columns -->
         <div
-          class="col-span-1 flex flex-col justify-between gap-8 sm:flex-row sm:gap-4 md:col-span-6 lg:col-span-6 lg:gap-8"
+          class="col-span-1 grid grid-cols-2 gap-8 md:col-span-6 md:gap-12 lg:col-span-5 lg:gap-16 xl:px-6"
         >
-          <div class="grid grid-cols-2 gap-4 sm:contents">
-            <!-- Company Column -->
-            {
-              companySection && (
-                <nav>
-                  <h6 class="mb-5 text-[17px] font-semibold text-base-content">
-                    <CmsRichText value={companySection.heading} />
-                  </h6>
-                  {companySection.links.map((link) => (
-                    <a
-                      href={link.url}
-                      class="mb-3.5 block text-[15px] text-base-content/80 transition-all duration-200 hover:translate-x-1 hover:text-primary"
-                    >
-                      <CmsRichText value={link.label} />
-                    </a>
-                  ))}
-                </nav>
-              )
-            }
+          <!-- Company Column -->
+          {
+            companySection && (
+              <nav>
+                <h6 class="mb-5 text-[17px] font-semibold text-base-content">
+                  <CmsRichText value={companySection.heading} />
+                </h6>
+                {companySection.links.map((link) => (
+                  <a
+                    href={link.url}
+                    class="mb-3.5 block text-[15px] text-base-content/80 transition-all duration-200 hover:translate-x-1 hover:text-primary"
+                  >
+                    <CmsRichText value={link.label} />
+                  </a>
+                ))}
+              </nav>
+            )
+          }
 
-            <!-- Services Column -->
-            {
-              servicesSection && (
-                <nav>
-                  <h6 class="mb-5 text-[17px] font-semibold text-base-content">
-                    <CmsRichText value={servicesSection.heading} />
-                  </h6>
-                  {servicesSection.links.map((link) => (
-                    <a
-                      href={link.url}
-                      class="mb-3.5 block text-[15px] text-base-content/80 transition-all duration-200 hover:translate-x-1 hover:text-primary"
-                    >
-                      <CmsRichText value={link.label} />
-                    </a>
-                  ))}
-                </nav>
-              )
-            }
-          </div>
-
-          <!-- Contact Links -->
-          <nav class="shrink-0">
-            <h6 class="mb-5 text-[17px] font-semibold text-base-content">
-              <CmsRichText value={footer.contact.heading} />
-            </h6>
-            <div class="space-y-4">
-              <div
-                class="flex items-center gap-3.5 rounded-2xl border border-base-200 bg-base-100 p-3.5 shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-md dark:border-base-300/30 dark:bg-base-200/10"
-              >
-                <div
-                  class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-content"
-                >
-                  <PhoneIcon class="h-4 w-4" />
-                </div>
-                <span class="truncate text-[14px] font-semibold text-base-content"
-                  ><CmsRichText value={footer.contact.phone} /></span
-                >
-              </div>
-              <div
-                class="flex items-center gap-3.5 rounded-2xl border border-base-200 bg-base-100 p-3.5 shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-md dark:border-base-300/30 dark:bg-base-200/10"
-              >
-                <div
-                  class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-content"
-                >
-                  <EnvelopeIcon class="h-4 w-4" />
-                </div>
-                <span
-                  class="truncate text-[14px] font-semibold text-base-content"
-                  title={footer.contact.email}><CmsRichText value={footer.contact.email} /></span
-                >
-              </div>
-            </div>
-          </nav>
+          <!-- Services Column -->
+          {
+            servicesSection && (
+              <nav>
+                <h6 class="mb-5 text-[17px] font-semibold text-base-content">
+                  <CmsRichText value={servicesSection.heading} />
+                </h6>
+                {servicesSection.links.map((link) => (
+                  <a
+                    href={link.url}
+                    class="mb-3.5 block text-[15px] text-base-content/80 transition-all duration-200 hover:translate-x-1 hover:text-primary"
+                  >
+                    <CmsRichText value={link.label} />
+                  </a>
+                ))}
+              </nav>
+            )
+          }
         </div>
 
         <!-- Offices & Global Presence -->
-        <div class="col-span-1 space-y-6 md:col-span-6 lg:col-span-3">
+        <div class="col-span-1 space-y-6 md:col-span-6 lg:col-span-4">
           <div>
             <div class="mb-3 flex items-center justify-between">
               <h6 class="text-[17px] font-semibold text-base-content">
@@ -172,14 +134,14 @@ const totalRows = (offices.length + emptyCellsCount) / 4;
             </div>
 
             <div class="relative">
-              <!-- India flag overlapping the top-right corner of the table -->
+              <!-- Country flag overlapping the top-right corner of the table -->
               <div class="pointer-events-none absolute -top-3.5 -right-4 z-20">
                 <img
                   src={`https://flagcdn.com/w80/${footer.offices.indiaFlagCode}.png`}
-                  alt="India flag"
+                  alt="Country flag"
                   loading="lazy"
                   decoding="async"
-                  class="h-auto w-[38px] rounded-xs border border-base-200 object-contain shadow-md dark:border-base-300/40"
+                  class="h-auto w-[48px] rounded-xs border border-base-200 object-contain shadow-md dark:border-base-300/40"
                 />
               </div>
 
@@ -256,14 +218,22 @@ const totalRows = (offices.length + emptyCellsCount) / 4;
                         </p>
 
                         <div class="mt-3 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 border-t border-base-200/50 pt-2.5 text-xs text-base-content/60 dark:border-base-300/20">
-                          <CmsRichText value={office.phone} className="font-medium" />
-                          <span class="hidden text-base-content/30 sm:inline">|</span>
-                          <a
-                            href={`mailto:${office.email}`}
-                            class="font-medium text-primary hover:underline"
-                          >
-                            <CmsRichText value={office.email} />
-                          </a>
+                          {office.phone?.trim() && (
+                            <>
+                              <CmsRichText value={office.phone} className="font-medium" />
+                              {office.email?.trim() && (
+                                <span class="hidden text-base-content/30 sm:inline">|</span>
+                              )}
+                            </>
+                          )}
+                          {office.email?.trim() && (
+                            <a
+                              href={`mailto:${office.email}`}
+                              class="font-medium text-primary hover:underline"
+                            >
+                              <CmsRichText value={office.email} />
+                            </a>
+                          )}
                         </div>
                       </div>
                     ))
@@ -300,7 +270,9 @@ const totalRows = (offices.length + emptyCellsCount) / 4;
                     title={country.name}
                     loading="lazy"
                     decoding="async"
-                    class="filter h-auto w-7 cursor-pointer rounded-xs border border-base-content/5 object-contain drop-shadow-[0_2px_3px_rgba(0,0,0,0.15)] transition-transform duration-200 hover:scale-125"
+                    class={`filter h-auto cursor-pointer rounded-xs border border-base-content/5 object-contain drop-shadow-[0_2px_3px_rgba(0,0,0,0.15)] transition-transform duration-200 hover:scale-125 ${
+                      country.code === 'in' ? 'w-6' : 'w-7'
+                    }`}
                   />
                 ))
               }

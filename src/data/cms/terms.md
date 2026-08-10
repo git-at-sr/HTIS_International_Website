@@ -9,7 +9,7 @@ pageHeader:
     url: /
 ---
 
-Welcome to **HTIS Telecom Pvt. Ltd.** By accessing our website, [htis.international](https://htis.international/), you agree to comply with and be bound by the following terms and conditions. Please read them carefully.
+Welcome to **HTIS International.** By accessing our website, [htis.international](https://htis.international/), you agree to comply with and be bound by the following terms and conditions. Please read them carefully.
 
 ## Acceptance of Terms
 
@@ -23,7 +23,7 @@ You agree not to misuse the content, features, or services for any unauthorized 
 
 ## Intellectual Property
 
-All content on this website, including HTIS logos, text, graphics, images, and software, is the property of HTIS Telecom Pvt. Ltd. and is protected by applicable copyright and trademark laws.
+All content on this website, including HTIS logos, text, graphics, images, and software, is the property of HTIS International and is protected by applicable copyright and trademark laws.
 
 ## Third-Party Links
 
@@ -35,7 +35,7 @@ The content on this website is provided "as is." We make no warranties, express 
 
 ## Limitation of Liability
 
-HTIS Telecom shall not be held liable for any direct, indirect, incidental, or consequential damages resulting from your use of this website.
+HTIS International shall not be held liable for any direct, indirect, incidental, or consequential damages resulting from your use of this website.
 
 ## Changes to Terms
 
@@ -49,6 +49,6 @@ These Terms & Conditions are governed by and construed in accordance with the la
 
 For any questions about these Terms, please contact:
 
-Email: [help@htis.in](mailto:help@htis.in)
+Email: [help@htis.International](mailto:help@htis.International)
 
 Address: E 94, First Floor, Eltop Area, Phase 8 Industrial Area, Mohali - 160055, Punjab, India

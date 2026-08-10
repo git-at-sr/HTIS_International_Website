@@ -480,6 +480,11 @@ details > summary::-webkit-details-marker {
   opacity: 0.8;
 }
 
+/* Visionary Core: slight lift for Ankush photo */
+.team-member-card:not(.active) .team-img.team-img-lift {
+  transform: scale(1.12) translateY(-4%);
+}
+
 .team-member-card.active .card-content {
   opacity: 1;
   pointer-events: auto;
@@ -489,6 +494,10 @@ details > summary::-webkit-details-marker {
   filter: grayscale(0%) contrast(1) brightness(1);
   transform: scale(1) translateY(0);
   opacity: 1;
+}
+
+.team-member-card.active .team-img.team-img-lift {
+  transform: scale(1.05) translateY(-5%);
 }
 
 .team-member-card:focus-visible {
@@ -580,6 +589,10 @@ details > summary::-webkit-details-marker {
 
   .team-gallery > .team-member-card.active:not(.team-cta-card) .team-img {
     transform: scale(1.1) translateY(2%);
+  }
+
+  .team-gallery > .team-member-card.active:not(.team-cta-card) .team-img.team-img-lift {
+    transform: scale(1.08) translateY(-5%);
   }
 
   .team-gallery > .team-cta-card,

@@ -325,18 +325,6 @@ content:
                     required: true
                     options:
                       values: [Facebook, Instagram, Youtube, Twitter, LinkedIn]
-          - name: contact
-            type: object
-            fields:
-              - name: heading
-                type: string
-                required: true
-              - name: phone
-                type: string
-                required: true
-              - name: email
-                type: string
-                required: true
           - name: offices
             label: Offices
             type: object
@@ -942,7 +930,7 @@ content:
               - name: indiaTabLabel
                 label: India tab label
                 type: string
-                required: true
+                required: false
               - name: globalLocations
                 label: Global locations
                 type: object
@@ -986,6 +974,7 @@ content:
                   collapsible:
                     collapsed: true
                     summary: '{name}'
+                required: false
                 fields:
                   - name: name
                     type: string
