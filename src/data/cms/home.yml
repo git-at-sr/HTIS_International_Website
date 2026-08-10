@@ -374,12 +374,12 @@ team:
   ctaUrl: /about#team
   members:
     - name: Natalia Markelova
-      role: Managing Director - Kazakhstan
+      role: Managing Director
       desc: Leads HTIS operations and growth strategy across Kazakhstan and the
         regional market.
       image: src/assets/Natalia.png
     - name: Aditya Kaushik
-      role: Managing Director - India
+      role: Chairman
       desc: Sets the company’s long-term goals and ensures we stay a leader in the
         technology industry.
       image: src/assets/edited-photo-1.png

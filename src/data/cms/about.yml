@@ -45,11 +45,11 @@ team:
   description: A passionate team of experts collaborating to deliver excellence.
   members:
     - name: Natalia Markelova
-      role: Managing Director - Kazakhstan
+      role: Managing Director
       dept: HTIS
       image: src/assets/Natalia.png
     - name: Aditya Kaushik
-      role: Managing Director - India
+      role: Chairman
       dept: HTIS
       image: src/assets/ak-2-1.png
     - name: Ankush Bhardwaj
