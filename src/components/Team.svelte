@@ -92,7 +92,7 @@
               <CmsRichTextSvelte value={member.name} />
             </h3>
             <p
-              class="mb-2 text-xs font-bold tracking-wider whitespace-nowrap text-primary uppercase sm:text-sm md:mb-4 md:text-base"
+              class="mb-2 max-w-full text-xs font-bold tracking-wider text-primary uppercase sm:text-sm md:mb-4 md:text-base whitespace-normal md:whitespace-nowrap"
             >
               <CmsRichTextSvelte value={member.role} />
             </p>

@@ -1170,3 +1170,179 @@ html[data-theme='htis-theme-dark'] {
   background-color: var(--color-presence-office) !important;
   opacity: 0.4;
 }
+
+/* Google Translate — hide default chrome / loader; keep layout stable
+   Used by browser-language auto-translation in Layout.astro */
+.goog-te-banner-frame,
+.goog-te-balloon-frame,
+.goog-te-menu-frame,
+.goog-te-gadget-icon,
+.goog-logo-link,
+#goog-gt-tt,
+.goog-tooltip,
+.goog-te-spinner,
+.goog-te-spinner-pos,
+.goog-te-spinner-animation,
+.goog-te-spinner-animation *,
+body > .skiptranslate,
+iframe.goog-te-banner-frame,
+iframe.goog-te-menu-frame {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.goog-te-spinner-pos {
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  position: fixed !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  z-index: -1 !important;
+}
+
+/* Keep host off-screen so GT can mount without a visible widget */
+#google_translate_element.htis-google-translate {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+body {
+  top: 0 !important;
+  position: static !important;
+  margin-top: 0 !important;
+}
+
+/* Google wraps text in <font>; keep typography/layout intact */
+font {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  vertical-align: inherit !important;
+  font-size: inherit !important;
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  font-style: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+  color: inherit !important;
+}
+
+font font {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Translated pages: longer strings break fixed English layouts */
+html.translated-ltr,
+html.translated-rtl {
+  /* Prefer wrapping over clipping/overlap */
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+html.translated-ltr .navbar-center nav > a,
+html.translated-rtl .navbar-center nav > a,
+html.translated-ltr .navbar-center nav > div > button,
+html.translated-rtl .navbar-center nav > div > button {
+  white-space: normal;
+  line-height: 1.2;
+  max-width: 8.5rem;
+  text-align: center;
+}
+
+html.translated-ltr .navbar-end .btn,
+html.translated-rtl .navbar-end .btn {
+  white-space: normal;
+  height: auto;
+  min-height: 2rem;
+  line-height: 1.2;
+}
+
+/* Visionary Core — role labels overflow when translated */
+html.translated-ltr .team-member-card .card-content h3,
+html.translated-rtl .team-member-card .card-content h3,
+html.translated-ltr .team-member-card .card-content p,
+html.translated-rtl .team-member-card .card-content p {
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+
+html.translated-ltr .team-member-card .card-content,
+html.translated-rtl .team-member-card .card-content {
+  width: min(100%, 22rem);
+  max-width: 100%;
+}
+
+html.translated-ltr .team-desc,
+html.translated-rtl .team-desc {
+  white-space: normal;
+}
+
+/* About team cards — allow multi-line roles */
+html.translated-ltr .no-scrollbar .truncate,
+html.translated-rtl .no-scrollbar .truncate {
+  overflow: visible;
+  text-overflow: unset;
+  white-space: normal;
+}
+
+/* Generic buttons/CTAs that use nowrap in English */
+html.translated-ltr .btn.whitespace-nowrap,
+html.translated-rtl .btn.whitespace-nowrap,
+html.translated-ltr .whitespace-nowrap.btn,
+html.translated-rtl .whitespace-nowrap.btn {
+  white-space: normal !important;
+  height: auto;
+  min-height: 2.75rem;
+  line-height: 1.25;
+  padding-block: 0.5rem;
+}
+
+/* Footer link columns */
+html.translated-ltr footer nav a,
+html.translated-rtl footer nav a {
+  white-space: normal;
+  line-height: 1.35;
+}
+
+/* Hero word carousel / tight absolute overlays */
+html.translated-ltr .absolute.z-20,
+html.translated-rtl .absolute.z-20 {
+  max-width: 100%;
+}
+
+/* Prevent Google highlight boxes from shifting layout */
+.goog-text-highlight {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* Journey: keep milestone copy below the film strip when translated */
+html.translated-ltr .journey-milestone-info,
+html.translated-rtl .journey-milestone-info {
+  height: auto !important;
+  min-height: 140px;
+}
+
+html.translated-ltr .carousel-container,
+html.translated-rtl .carousel-container {
+  margin-bottom: 0.5rem;
+  z-index: 1;
+}
+
+html.translated-ltr .journey-milestone-info h3,
+html.translated-rtl .journey-milestone-info h3,
+html.translated-ltr .journey-milestone-info p,
+html.translated-rtl .journey-milestone-info p {
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+}

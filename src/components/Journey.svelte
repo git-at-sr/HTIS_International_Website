@@ -40,6 +40,16 @@
     return () => clearInterval(intervalId);
   });
 
+  // client:visible hydrates after GT's first pass and resets copy to English.
+  // All milestones stay mounted, so one re-translate covers every slide for clicks.
+  $effect(() => {
+    if (typeof window === 'undefined') return;
+    const timers = [100, 500, 1200].map((ms) =>
+      window.setTimeout(() => window.htisTranslate?.refreshContent?.(), ms),
+    );
+    return () => timers.forEach((id) => window.clearTimeout(id));
+  });
+
   // -- Handlers --
   /** Moves to the next slide, wrapping around to the start */
   function nextSlide() {
@@ -153,28 +163,38 @@
       </div>
     </div>
 
-    <!-- Active Milestone Info -->
+    <!-- Milestone Info
+         Keep EVERY milestone in the DOM (show/hide only). Remounting via {#key}
+         injects fresh English and Google Translate never catches up on click. -->
     <div
-      class="mt-8 flex h-[140px] flex-col items-center justify-end text-center md:mt-4 md:h-[110px]"
+      class="journey-milestone-info relative z-0 mt-10 flex min-h-[140px] w-full flex-col items-center justify-start text-center md:mt-8 md:min-h-[120px]"
     >
-      {#key activeIndex}
-        <div class="animate-fade-in-up flex flex-col items-center px-4">
-          <h2 class="text-4xl font-extrabold text-primary md:text-5xl">
-            <CmsRichTextSvelte value={milestones[activeIndex].year} />
-          </h2>
-          <h3 class="mt-2 text-xl font-bold text-base-content md:mt-1 md:text-2xl">
-            <CmsRichTextSvelte value={milestones[activeIndex].title} />
-          </h3>
-          <p
-            class="mx-auto mt-3 max-w-xl text-sm font-medium leading-relaxed text-base-content/80 md:mt-2 md:text-base"
+      <div class="relative flex w-full justify-center">
+        {#each milestones as milestone, index}
+          <div
+            class="flex w-full max-w-2xl flex-col items-center px-4 transition-opacity duration-300 {activeIndex ===
+            index
+              ? 'relative animate-fade-in-up opacity-100'
+              : 'pointer-events-none absolute inset-x-0 top-0 opacity-0'}"
+            aria-hidden={activeIndex !== index}
           >
-            <CmsRichTextSvelte value={milestones[activeIndex].description} />
-          </p>
-        </div>
-      {/key}
+            <h2 class="text-4xl font-extrabold text-primary md:text-5xl">
+              <CmsRichTextSvelte value={milestone.year} />
+            </h2>
+            <h3 class="mt-2 text-xl font-bold text-base-content md:mt-1 md:text-2xl">
+              <CmsRichTextSvelte value={milestone.title} />
+            </h3>
+            <p
+              class="mx-auto mt-3 max-w-xl text-sm font-medium leading-relaxed text-base-content/80 md:mt-2 md:text-base"
+            >
+              <CmsRichTextSvelte value={milestone.description} />
+            </p>
+          </div>
+        {/each}
+      </div>
 
       <!-- Vertical Connecting Line to Timeline -->
-      <div class="mt-6 h-10 w-[2px] rounded-full bg-primary/40 md:mt-4 md:h-5"></div>
+      <div class="mt-6 h-10 w-[2px] shrink-0 rounded-full bg-primary/40 md:mt-4 md:h-5"></div>
     </div>
 
     <!-- Timeline Navigation -->

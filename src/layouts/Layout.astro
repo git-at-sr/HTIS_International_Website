@@ -23,11 +23,39 @@ const ogImageUrl = new URL(ogImagePath, `${siteUrl}/`).toString();
 ---
 
 <!doctype html>
-<html lang={site.language} data-theme={defaultTheme} class="scroll-smooth">
+<html lang={site.language} data-theme={defaultTheme} class="scroll-smooth" translate="yes">
   <head>
     <ClientRouter />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <!-- Hide Google Translate loader/banner before their script paints -->
+    <style is:inline>
+      .goog-te-spinner-pos,
+      .goog-te-spinner,
+      .goog-te-spinner-animation,
+      .goog-te-banner-frame,
+      iframe.goog-te-banner-frame,
+      body > .skiptranslate,
+      #goog-gt-tt,
+      .goog-tooltip {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        position: fixed !important;
+        left: -10000px !important;
+        top: -10000px !important;
+        z-index: -1 !important;
+      }
+      body {
+        top: 0 !important;
+        position: static !important;
+      }
+    </style>
     <link rel="icon" type="image/png" href={favicon} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
@@ -117,7 +145,7 @@ const ogImageUrl = new URL(ogImagePath, `${siteUrl}/`).toString();
       document.addEventListener('astro:page-load', applyTheme);
     </script>
   </head>
-  <body class="bg-base-100 text-base-content antialiased">
+  <body class="bg-base-100 text-base-content antialiased" translate="yes">
     {
       site.globalToast.enabled && globalToastMessage && (
         <div
@@ -146,6 +174,320 @@ const ogImageUrl = new URL(ogImagePath, `${siteUrl}/`).toString();
     }
     <slot />
     <WhatsAppButton />
+    <div id="google_translate_element" class="htis-google-translate" aria-hidden="true"></div>
+    <script is:inline>
+      (function initHtisBrowserTranslate() {
+        const MODE_KEY = 'htisTranslateMode';
+        const SOURCE_LANG = 'en';
+        const SCRIPT_ID = 'htis-google-translate-script';
+
+        const getCookie = (name) => {
+          const match = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'));
+          return match ? decodeURIComponent(match[1]) : '';
+        };
+
+        const setGoogTransCookie = (value) => {
+          const expires = ';expires=' + new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toUTCString();
+          document.cookie = 'googtrans=' + value + ';path=/' + expires;
+          document.cookie = 'googtrans=' + value + ';path=/;domain=' + location.hostname + expires;
+        };
+
+        const clearGoogTransCookie = () => {
+          const past = ';expires=Thu, 01 Jan 1970 00:00:00 GMT';
+          document.cookie = 'googtrans=;path=/' + past;
+          document.cookie = 'googtrans=;path=/;domain=' + location.hostname + past;
+          const parts = location.hostname.split('.');
+          if (parts.length > 2) {
+            document.cookie = 'googtrans=;path=/;domain=.' + parts.slice(-2).join('.') + past;
+          }
+        };
+
+        const getBrowserLang = () => {
+          const raw = (navigator.language || navigator.languages?.[0] || SOURCE_LANG).trim();
+          const lower = raw.toLowerCase();
+          if (lower.startsWith('zh-cn') || lower === 'zh') return 'zh-CN';
+          if (lower.startsWith('zh-tw') || lower.startsWith('zh-hk')) return 'zh-TW';
+          if (lower.startsWith('pt-br')) return 'pt';
+          return lower.split('-')[0] || SOURCE_LANG;
+        };
+
+        const getMode = () => {
+          try {
+            return localStorage.getItem(MODE_KEY) === 'en' ? 'en' : 'auto';
+          } catch {
+            return 'auto';
+          }
+        };
+
+        const getTargetLang = () => (getMode() === 'en' ? SOURCE_LANG : getBrowserLang());
+
+        const syncHtmlLang = () => {
+          document.documentElement.lang = getTargetLang();
+        };
+
+        const ensureTranslateCookie = () => {
+          const target = getTargetLang();
+          const current = getCookie('googtrans');
+
+          if (target === SOURCE_LANG) {
+            if (current && current !== '/' + SOURCE_LANG + '/' + SOURCE_LANG) {
+              clearGoogTransCookie();
+              location.reload();
+              return true;
+            }
+            clearGoogTransCookie();
+            return false;
+          }
+
+          const desired = '/' + SOURCE_LANG + '/' + target;
+          if (current !== desired) {
+            setGoogTransCookie(desired);
+            location.reload();
+            return true;
+          }
+          return false;
+        };
+
+        const loadGoogleTranslate = () => {
+          if (document.getElementById(SCRIPT_ID) || window.google?.translate?.TranslateElement) {
+            return;
+          }
+
+          window.googleTranslateElementInit = function googleTranslateElementInit() {
+            if (!window.google?.translate?.TranslateElement) return;
+            const host = document.getElementById('google_translate_element');
+            if (!host) return;
+            host.innerHTML = '';
+            new window.google.translate.TranslateElement(
+              {
+                pageLanguage: SOURCE_LANG,
+                autoDisplay: false,
+              },
+              'google_translate_element',
+            );
+          };
+
+          const script = document.createElement('script');
+          script.id = SCRIPT_ID;
+          script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+          script.async = true;
+          document.head.appendChild(script);
+        };
+
+        const applyTranslation = () => {
+          syncHtmlLang();
+          if (getTargetLang() === SOURCE_LANG) return;
+          loadGoogleTranslate();
+        };
+
+        // Svelte islands / map popups can inject English after GT runs.
+        // Re-fire the hidden language combo so new copy is translated too.
+        const retriggerTranslate = () => {
+          if (getTargetLang() === SOURCE_LANG) return;
+          const combo = document.querySelector('.goog-te-combo');
+          if (!(combo instanceof HTMLSelectElement) || !combo.value) return;
+          combo.dispatchEvent(new Event('change'));
+        };
+
+        let refreshTimer = 0;
+        const refreshTranslatedContent = () => {
+          if (getTargetLang() === SOURCE_LANG) return;
+          window.clearTimeout(refreshTimer);
+          refreshTimer = window.setTimeout(() => {
+            retriggerTranslate();
+            hideTranslateChrome();
+            // Journey/team islands remount copy slightly later than the first paint
+            window.setTimeout(() => {
+              retriggerTranslate();
+              hideTranslateChrome();
+            }, 280);
+          }, 60);
+        };
+
+        const scheduleRetranslate = () => {
+          if (getTargetLang() === SOURCE_LANG) return;
+          [400, 1200, 2500, 4500].forEach((ms) => {
+            window.setTimeout(() => {
+              retriggerTranslate();
+              hideTranslateChrome();
+            }, ms);
+          });
+        };
+
+        window.htisTranslate = {
+          getMode,
+          getBrowserLang,
+          getTargetLang,
+          setEnglish() {
+            try {
+              localStorage.setItem(MODE_KEY, 'en');
+            } catch {}
+            clearGoogTransCookie();
+            location.reload();
+          },
+          setAuto() {
+            try {
+              localStorage.setItem(MODE_KEY, 'auto');
+            } catch {}
+            const target = getBrowserLang();
+            if (target === SOURCE_LANG) {
+              clearGoogTransCookie();
+            } else {
+              setGoogTransCookie('/' + SOURCE_LANG + '/' + target);
+            }
+            location.reload();
+          },
+          refreshLabel() {
+            document.dispatchEvent(new CustomEvent('htis:translate-mode'));
+          },
+          retrigger: retriggerTranslate,
+          refreshContent: refreshTranslatedContent,
+        };
+
+        const TRANSLATE_CHROME_SELECTORS = [
+          '.goog-te-spinner-pos',
+          '.goog-te-spinner',
+          '.goog-te-spinner-animation',
+          '.goog-te-banner-frame',
+          'iframe.goog-te-banner-frame',
+          'iframe.goog-te-menu-frame',
+          'body > .skiptranslate',
+          '#goog-gt-tt',
+          '.goog-tooltip',
+          '.VIpgJd-ZVi9od-ORHb-OEVmcd',
+          '.VIpgJd-ZVi9od-aZ2wEe-wOHMyf',
+        ].join(',');
+
+        const hideTranslateChrome = () => {
+          document.querySelectorAll(TRANSLATE_CHROME_SELECTORS).forEach((el) => {
+            // Spinner must be removed — Google often re-shows it via inline styles
+            if (
+              el.classList?.contains('goog-te-spinner-pos') ||
+              el.classList?.contains('goog-te-spinner') ||
+              el.classList?.contains('goog-te-spinner-animation') ||
+              (el instanceof HTMLElement && /spinner/i.test(el.className || ''))
+            ) {
+              el.remove();
+              return;
+            }
+            if (!(el instanceof HTMLElement)) return;
+            el.style.setProperty('display', 'none', 'important');
+            el.style.setProperty('visibility', 'hidden', 'important');
+            el.style.setProperty('opacity', '0', 'important');
+            el.style.setProperty('pointer-events', 'none', 'important');
+            el.style.setProperty('width', '0', 'important');
+            el.style.setProperty('height', '0', 'important');
+            el.style.setProperty('left', '-10000px', 'important');
+            el.style.setProperty('top', '-10000px', 'important');
+            el.setAttribute('aria-hidden', 'true');
+          });
+
+          // Catch any fixed overlay Google injects while loading
+          document.querySelectorAll('body > div').forEach((el) => {
+            if (!(el instanceof HTMLElement)) return;
+            const cls = el.className?.toString?.() || '';
+            if (/spinner|skiptranslate|goog-te/i.test(cls) && !el.id?.includes('google_translate')) {
+              if (/spinner/i.test(cls)) {
+                el.remove();
+                return;
+              }
+              el.style.setProperty('display', 'none', 'important');
+              el.style.setProperty('visibility', 'hidden', 'important');
+            }
+          });
+
+          document.body?.style.setProperty('top', '0', 'important');
+          document.body?.style.setProperty('position', 'static', 'important');
+        };
+
+        if (!window.__htisTranslateChromeObserver) {
+          const observer = new MutationObserver(() => {
+            hideTranslateChrome();
+          });
+          observer.observe(document.documentElement, {
+            childList: true,
+            subtree: true,
+            attributes: true,
+            attributeFilter: ['style', 'class'],
+          });
+          window.__htisTranslateChromeObserver = observer;
+        }
+
+        // Re-translate when islands/map popups inject fresh English HTML.
+        if (!window.__htisTranslateContentObserver) {
+          const isTranslateNoise = (node) => {
+            if (!(node instanceof Element)) return false;
+            const cls = typeof node.className === 'string' ? node.className : '';
+            return (
+              node.id === 'google_translate_element' ||
+              node.tagName === 'FONT' ||
+              /goog-te|skiptranslate|VIpgJd/i.test(cls) ||
+              !!node.closest?.('#google_translate_element, .skiptranslate')
+            );
+          };
+
+          const contentObserver = new MutationObserver((mutations) => {
+            if (getTargetLang() === SOURCE_LANG) return;
+
+            let shouldRefresh = false;
+            for (const mutation of mutations) {
+              for (const node of mutation.addedNodes) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                  if ((node.textContent || '').trim().length > 0) shouldRefresh = true;
+                  continue;
+                }
+                if (!(node instanceof Element) || isTranslateNoise(node)) continue;
+                if (
+                  node.classList?.contains('presence-popup-content') ||
+                  node.querySelector?.('.presence-popup-content')
+                ) {
+                  shouldRefresh = true;
+                  break;
+                }
+                const text = (node.textContent || '').trim();
+                if (text.length > 20 && !node.querySelector?.('font')) {
+                  shouldRefresh = true;
+                  break;
+                }
+              }
+              if (shouldRefresh) break;
+            }
+            if (shouldRefresh) refreshTranslatedContent();
+          });
+
+          contentObserver.observe(document.body, { childList: true, subtree: true });
+          window.__htisTranslateContentObserver = contentObserver;
+        }
+
+        if (ensureTranslateCookie()) return;
+        applyTranslation();
+        hideTranslateChrome();
+        scheduleRetranslate();
+
+        document.addEventListener('astro:page-load', () => {
+          syncHtmlLang();
+          if (getTargetLang() !== SOURCE_LANG) {
+            loadGoogleTranslate();
+            if (typeof window.googleTranslateElementInit === 'function' && window.google?.translate?.TranslateElement) {
+              window.googleTranslateElementInit();
+            }
+            scheduleRetranslate();
+          }
+          hideTranslateChrome();
+          window.htisTranslate.refreshLabel();
+        });
+
+        document.addEventListener('astro:before-preparation', (event) => {
+          const translated =
+            getTargetLang() !== SOURCE_LANG ||
+            document.documentElement.classList.contains('translated-ltr') ||
+            document.documentElement.classList.contains('translated-rtl');
+          if (!translated) return;
+          event.preventDefault();
+          location.href = event.to.href;
+        });
+      })();
+    </script>
     <script is:inline>
       const TOAST_ELEMENT_ID = 'global-site-toast';
       const TOAST_DISMISSED_KEY = '__htisGlobalToastDismissed';

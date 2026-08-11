@@ -131,18 +131,18 @@
                   : 'object-center'}"
               />
             </div>
-            <div class="flex flex-col min-w-0">
+            <div class="flex min-w-0 flex-col overflow-hidden">
               <CmsRichTextSvelte
                 value={member.name}
                 className="text-lg font-bold text-base-content leading-tight truncate"
               />
               <CmsRichTextSvelte
                 value={member.role}
-                className="text-sm font-semibold text-primary mt-1 leading-tight truncate"
+                className="mt-1 text-sm font-semibold leading-snug text-primary line-clamp-2"
               />
               <CmsRichTextSvelte
                 value={member.dept}
-                className="text-xs text-base-content/60 mt-1 leading-tight truncate"
+                className="mt-1 text-xs leading-snug text-base-content/60 line-clamp-2"
               />
             </div>
           </div>

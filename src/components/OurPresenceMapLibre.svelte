@@ -174,6 +174,10 @@
           selectedLocation = null;
         }
       });
+      popup.on('open', () => {
+        // Map popup HTML is injected after page translate — ask GT to catch up.
+        window.setTimeout(() => window.htisTranslate?.refreshContent?.(), 50);
+      });
       const marker = new ML.Marker({ element: markerElement(loc), anchor: loc.isHQ ? 'bottom' : 'center' })
         .setLngLat([loc.lng, loc.lat])
         .addTo(map);
